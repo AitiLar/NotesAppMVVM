@@ -1,9 +1,6 @@
 package ai.lar.notesappmvvm.navigation
 
-import ai.lar.notesappmvvm.screens.Add
-import ai.lar.notesappmvvm.screens.Main
-import ai.lar.notesappmvvm.screens.Note
-import ai.lar.notesappmvvm.screens.Start
+import ai.lar.notesappmvvm.screens.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.internal.composableLambda
 import androidx.compose.ui.input.pointer.PointerEventPass
@@ -22,10 +19,10 @@ sealed class NavRoute(val route: String){
 fun NoteNavHost() {
     val navContruller = rememberNavController()
     NavHost(navController = navContruller, startDestination = NavRoute.Start.route){
-        composable(NavRoute.Start.route){ Start(navController = navContruller)}
-        composable(NavRoute.Main.route){ Main(navController = navContruller) }
-        composable(NavRoute.Add.route){ Add(navController = navContruller) }
-        composable(NavRoute.Note.route){ Note(navController = navContruller)}
+        composable(NavRoute.Start.route){ StartScreen(navController = navContruller)}
+        composable(NavRoute.Main.route){ MainScreen(navController = navContruller) }
+        composable(NavRoute.Add.route){ AddScreen(navController = navContruller) }
+        composable(NavRoute.Note.route){ NoteScreen(navController = navContruller)}
     }
 
 }
