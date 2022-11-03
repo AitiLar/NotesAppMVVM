@@ -8,7 +8,6 @@ import ai.lar.notesappmvvm.ui.theme.NotesAppMVVMTheme
 import android.app.Application
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,11 +30,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun MainScreen(navController: NavHostController) {
-    val context = LocalContext.current
-    val mViewModel: MainViewModel =
-        viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+fun MainScreen(navController: NavHostController, viewModel: MainViewModel) {
 
+    val notes = viewModel.readAllNotes().observeAsState(listOf()).value
 
     Scaffold(
         floatingActionButton = {
@@ -48,20 +45,13 @@ fun MainScreen(navController: NavHostController) {
             }
         }
     ) {
-        /*  Column() {
-            NoteItem(title = "Note 1", subtitle = "Subtitle for note 1", navController = navController)
-             NoteItem(title = "Note 1", subtitle = "Subtitle for note 2", navController = navController)
-             NoteItem(title = "Note 1", subtitle = "Subtitle for note 3", navController = navController)
-             NoteItem(title = "Note 1", subtitle = "Subtitle for note 4", navController = navController)
-
-        }
 
         LazyColumn{
             items(notes) { item: Note ->
                 NoteItem(note = item, navController = navController)
             }
         }
-*/
+
     }
 }
 
@@ -92,6 +82,9 @@ fun NoteItem(note: Note, navController: NavHostController){
 @Composable
 fun prevMainScreen(){
     NotesAppMVVMTheme {
-        MainScreen(navController = rememberNavController())
+        val context = LocalContext.current
+        val mViewModel: MainViewModel =
+            viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+        MainScreen(navController = rememberNavController(), viewModel = mViewModel)
     }
 }
