@@ -4,6 +4,9 @@ import ai.lar.notesappmvvm.MainViewModel
 import ai.lar.notesappmvvm.MainViewModelFactory
 import ai.lar.notesappmvvm.navigation.NavRoute
 import ai.lar.notesappmvvm.ui.theme.NotesAppMVVMTheme
+import ai.lar.notesappmvvm.utils.Constants.Keys.FIREBASE_DATABASE
+import ai.lar.notesappmvvm.utils.Constants.Keys.ROOM_DATABASE
+import ai.lar.notesappmvvm.utils.Constants.Keys.WHAT_WILL_WE_USE
 import ai.lar.notesappmvvm.utils.TYPE_FIREBASE
 import ai.lar.notesappmvvm.utils.TYPE_ROOM
 import android.app.Application
@@ -33,7 +36,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
             ){
-            Text(text = "What will we use?")
+            Text(text = WHAT_WILL_WE_USE)
             Button(onClick = {
                 mViewModel.initDatabase(TYPE_ROOM){
                     navController.navigate(route = NavRoute.Main.route)
@@ -44,7 +47,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                 .width(200.dp)
                 .padding(vertical = 8.dp)
             ){
-                Text(text = "Room database")
+                Text(text = ROOM_DATABASE)
             }
             Button(onClick = {
                 mViewModel.initDatabase(TYPE_FIREBASE){
@@ -56,7 +59,7 @@ fun StartScreen(navController: NavHostController, viewModel: MainViewModel) {
                     .width(200.dp)
                     .padding(vertical = 8.dp)
             ){
-                Text(text = "Firebase database")
+                Text(text = FIREBASE_DATABASE)
             }
         }
     }
