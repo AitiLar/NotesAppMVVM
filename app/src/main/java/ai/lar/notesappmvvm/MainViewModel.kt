@@ -1,5 +1,6 @@
 package ai.lar.notesappmvvm
 
+import ai.lar.notesappmvvm.database.firebase.AppFirebaseRepository
 import ai.lar.notesappmvvm.database.room.AppRoomDatabase
 import ai.lar.notesappmvvm.database.room.repository.RoomRepository
 import ai.lar.notesappmvvm.model.Note
@@ -24,6 +25,13 @@ class MainViewModel (application: Application) :AndroidViewModel(application) {
                 val dao = AppRoomDatabase.getInstance(context = context).getRoomDao()
                 REPOSITORY = RoomRepository(dao)
                 onSuccess()
+            }
+            TYPE_FIREBASE -> {
+                REPOSITORY = AppFirebaseRepository()
+                REPOSITORY.connectToDatabase(
+                    {onSuccess()},
+                    {Log.d("checkData", "Error: ${it}")}
+                )
             }
         }
     }
